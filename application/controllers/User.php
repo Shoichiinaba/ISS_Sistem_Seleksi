@@ -8,6 +8,7 @@ class User extends AUTH_Controller {
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->model('M_admin');
+		$this->load->model('M_HR');
 
 		
 		
@@ -15,6 +16,8 @@ class User extends AUTH_Controller {
 	function index()
 	{
 		$data['list']=$this->M_admin->get_data_admin();
+		$data['perpanjang']		=$this->M_HAdmin->perpanjang();
+		$data['Tperpanjang']	=$this->M_HAdmin->Tperpanjang();
 		$data['content'] = 'admin/list_admin';
 		$data['userdata'] 	= $this->userdata;
 		$this->load->view($this->template, $data);	    
@@ -22,9 +25,10 @@ class User extends AUTH_Controller {
 
 	function HRD()
 	{
-		$data['list']=$this->M_admin->get_data_hrd();
-		$data['content'] = 'admin/list_HRD';
-		$data['userdata'] 	= $this->userdata;
+		$data['list']			=$this->M_admin->get_data_hrd();
+		$data['content'] 		= 'HRD/list_HRD';
+		$data['notif']			=$this->M_HR->get_notif();
+		$data['userdata'] 		= $this->userdata;
 		$this->load->view($this->template, $data);	    
 	}
 

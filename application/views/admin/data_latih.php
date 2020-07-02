@@ -38,7 +38,7 @@
                         <div class="box-body">
                             <div class="table-responsive">
                                 <table id="example1" class="table table-bordered table-striped" >
-                                    <thead class="bg-purple">
+                                    <thead class="bg-purple-gradient">
                                         <tr>
                                             <th>No</th>
                                             <th width ='15%'>Nama</th>

@@ -3,7 +3,7 @@
 class M_array extends CI_Model {
     
     function data(){
-        $sql = $this->db->get("pkh_db");
+        $sql = $this->db->get("iss_kardb");
         return $sql->result_array();
     }
         private $data = array();

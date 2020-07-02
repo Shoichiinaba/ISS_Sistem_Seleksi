@@ -1,27 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class tentukan_form extends AUTH_Controller {
+class History_k extends AUTH_Controller {
 	var $template='template/index';
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('');
+		$this->load->model('M_HAdmin');
 		$this->load->model('M_array');
 		$this->load->helper('url');
 	}
 	
 	function index()
 	{
-		$data['content'] 		= 'admin/form_bantuan';
-		$data['perpanjang']		=$this->M_HAdmin->hitperpanjang();
-		$data['userdata'] 		= $this->userdata;
+		$data['list']				=$this->M_HAdmin->history();
+		$data['perpanjang']			=$this->M_HAdmin->hitperpanjang();
+		$data['content'] 			= 'admin/History';
+		$data['userdata'] 			= $this->userdata;
         $this->load->view($this->template, $data);	
 	}
 
-	function simpan_predform()
-	{
-		
-	}
 	
 }

@@ -15,7 +15,9 @@ class Data_latih extends AUTH_Controller {
 	function index()
 	{	
 		$data['list']				=$this->M_latih->get_latih();
+		$data['perpanjang']			=$this->M_HAdmin->hitperpanjang();
 		$data['jml_latih'] 			= $this->M_latih->get_jml_latih();
+		$data['Tperpanjang']		=$this->M_HAdmin->Tperpanjang();
 		$data['jml_perpanjang'] 	= $this->M_latih->get_perpanjang();
 		$data['jml_tperpanjang'] 	= $this->M_latih->get_tperpanjang();
 		$data['content'] 			='admin/data_latih';

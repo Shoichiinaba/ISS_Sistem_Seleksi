@@ -39,7 +39,7 @@
                         <div class="box-body">
                             <div class="table-responsive">
                                 <table id="example1" class="table table-bordered table-striped" >
-                                    <thead class="bg-teal">
+                                    <thead class="bg-teal-gradient">
                                         <tr>
                                             <th>Id</th>
                                             <th>Username</th>

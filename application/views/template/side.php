@@ -21,21 +21,21 @@
     <li class="treeview active">
           <li <?= $this->uri->segment(1) == 'Dashboard' || $this->uri->segment(1) == '' ? 'class="active"' : ''?>>
           	<a href="<?php echo site_url('Dashboard'); ?>">
-            <i style= 'color: purple' class=" fa fa-user-secret"></i> <span>Beranda</span>
+            <i style= 'color: teal' class=" fa fa-user-secret"></i> <span>Beranda</span>
           </a></li >
         </li>
 
         <li class="treeview active">
           <li <?=$this->uri->segment(1) =='Data_latih' || $this->uri->segment(1) == '' ? 'class="active"' : ''?>>
             <a href="<?php echo site_url('Data_latih'); ?>">
-            <i style= 'color: purple' class=" fa fa-clipboard"></i> <span>Data Latih</span>
+            <i style= 'color: teal' class=" fa fa-clipboard"></i> <span>Data Latih</span>
           </a></li>
 
           <li class="treeview <?=$this->uri->segment(1) == 'tentukan_form' || $this->uri->segment(1) == 'tentukan_bantuan' ? 'active' : ''?>">
           <a href="#">
-            <i style= 'color: purple' class="fa fa-strikethrough"></i> <span>Tentukan Penerima Bantuan</span>
+            <i style= 'color: teal' class="fa fa-strikethrough"></i> <span>Tentukan Penerima Bantuan</span>
             <span class="pull-right-container">
-              <i style= 'color: purple' class="fa fa-angle-left pull-right"></i>
+              <i style= 'color: teal' class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -46,30 +46,30 @@
           </ul>
           </li>
 
-          <li <?=$this->uri->segment(1) =='' ? 'class="active"' : ''?>>
-            <a href="<?php echo site_url(''); ?>">
-            <i style= 'color: purple' class=" fa fa-newspaper-o"></i> <span>Hasil Uji Data</span>
-          </a></li>
-
-          <li <?=$this->uri->segment(1) =='' ? 'class="active"' : ''?>>
-            <a href="<?php echo site_url(''); ?>">
-            <i style= 'color: purple' class=" fa  fa-share-alt"></i> <span>History pengiriman Ke HRD</span>
-          </a></li>
-
-</li> 
-
+        <li class="treeview active">
+              <li <?=$this->uri->segment(1) =='Hasil_seleksi' || $this->uri->segment(1) == '' ? 'class="active"' : ''?>>
+                <a href="<?php echo site_url('Hasil_seleksi'); ?>">
+                <i style= 'color: teal' class=" fa fa-calculator"></i> <span>Hasil Seleksi</span>
+              </a>
+        </li>
+        <li <?=$this->uri->segment(1) =='History_k' ? 'class="active"' : ''?>>
+              <a href="<?php echo site_url('History_k'); ?>">
+              <i style= 'color: teal' class="fa  fa-history"></i><span>History Kirim Ke HRD</span>
+              <span class="label pull-right bg-blue right"> <?php echo $perpanjang; ?> </span>
+              </a>
+        </li>
 <li class="treeview <?=$this->uri->segment(1) == 'admin' || $this->uri->segment(1) == 'User' ? 'active' : ''?>">
           <a href="#">
-            <i style= 'color: purple' class="fa fa-users"></i> <span>Admin</span>
+            <i style= 'color: teal' class="fa fa-users"></i> <span>Admin</span>
             <span class="pull-right-container">
-              <i style= 'color: purple' class="fa fa-angle-left pull-right"></i>
+              <i style= 'color: teal' class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li <?= $this->uri->segment(1) == 'admin' ? 'class="active"' : ''?>>
-            <a href="<?php echo site_url('admin'); ?>"><i style= 'color: blue' class="fa fa-user-plus"></i> Tambah Admin</a></li>
+            <a href="<?php echo site_url('admin'); ?>"><i style= 'color: yellow' class="fa fa-user-plus"></i> Tambah Admin</a></li>
             <li <?= $this->uri->segment(1) == 'User' ? 'class="active"' : ''?>>
-            <a href="<?php echo site_url('User'); ?>"><i style= 'color: blue' class="fa  fa-list-alt"></i> List Data Admin</a></li>
+            <a href="<?php echo site_url('User'); ?>"><i style= 'color: yellow' class="fa  fa-list-alt"></i> List Data Admin</a></li>
           </ul>
 </li>
 <!-- Menu HRD -->
@@ -81,10 +81,17 @@
           </a></li >
           </li>
 
-          <li <?=$this->uri->segment(1) =='' ? 'class="active"' : ''?>>
-            <a href="<?php echo site_url(''); ?>">
-            <i style= 'color: red' class=" fa  fa-share-alt"></i> <span>Hasil Perpanjangan</span>
-          </a></li>
+          <li <?=$this->uri->segment(1) =='KirimHR' ? 'class="active"' : ''?>>
+              <a href="<?php echo site_url('KirimHR'); ?>">
+              <i style= 'color: red' class="fa  fa-share-alt"></i><span>Hasil [Kiriman Admin] </span>
+              <span class="badge bg-orange right"><?php echo $notif; ?></span>
+              </a>
+          </li>
+          <li <?=$this->uri->segment(1) =='New_kontrak' ? 'class="active"' : ''?>>
+              <a href="<?php echo site_url('New_kontrak'); ?>">
+              <i style= 'color: red' class="fa  fa-pied-piper-alt"></i><span> Sudah di Kontrak </span>
+              </a>
+          </li>
     </li> 
 
     <li class="treeview <?=$this->uri->segment(1) == 'admin' || $this->uri->segment(1) == 'User' ? 'active' : ''?>">

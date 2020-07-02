@@ -7,6 +7,7 @@ class admin extends AUTH_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('M_admin');
+		$this->load->model('M_HR');
 		$this->load->helper('url');
 	}
 
@@ -31,6 +32,7 @@ class admin extends AUTH_Controller {
 			// redirect('admin/tanbah_user');
 
 		$data['content']  		= 'admin/daftar';
+		$data['notif']			=$this->M_HR->get_notif();
 		$data['userdata'] 		= $this->userdata;
         $this->load->view($this->template, $data);	
 
