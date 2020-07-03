@@ -18,17 +18,14 @@
                         <table id="example1" class="table table-bordered table-striped" >
                             <thead class="bg-green-gradient">
                                 <tr>
-                                    <th>No</th>
-                                    <th width ='15%'>Nama</th>
-                                    <th width ='18%'>Penampilan</th>
-                                    <th width ='14%'>Kelengkapan</th>
-                                    <th>Kehadiran</th>
-                                    <th>Accident</th>
-                                    <th width ='14%'>Knowlage</th>
-                                    <th width ='12%'>Tanggung Jawab</th>
-                                    <th width ='12%'>Team Work</th>
-                                    <th width ='10%'>Best Employee</th>
-                                    <th width ='10%'>Hasil</th>
+                                    <th width = '3%'>No</th>
+                                    <th width ='8%'>NIP</th>
+                                    <th width ='12%'>Nama</th>
+                                    <th width ='8%'>Nilai Perpanjang</th>
+                                    <th width ='8%'>Nilai Tidak</th>
+                                    <th width ='7%'>Hasil</th>
+                                    <th width ='7%'>Status HRD</th>
+                                    <th width ='8%'>Tgl Dikontrak</th>
                                     <th width ='6%'>Action</th>
 
                                 </tr>
@@ -36,32 +33,34 @@
                                 <tbody>
                                         <?php $no= 0; foreach ($list as $g ): $no++;?>
                                     <tr>
-                                        <td><?php echo $no; ?></td>
-                                        <td><?php echo $g->nama_karyawan; ?></td>
-                                        <td><?php echo $g->penampilan; ?></td>
-                                        <td><?php echo $g->kelengkapan; ?></td>
-                                        <td><?php echo $g->kehadiran; ?></td>
-                                        <td><?php echo $g->accident	; ?></td>
-                                        <td><?php echo $g->knowlage; ?></td>
-                                        <td><?php echo $g->tanggung_jawab; ?></td>
-                                        <td><?php echo $g->teamwork; ?></td>
-                                        <td><?php echo $g->best_employee; ?></td>
-                                        <td>
-                                        <?php if($g->hasil=='Tidak diperpanjang'){
-                                                            echo "<span class='label label-warning'> Tidak diperpanjang</span>";
-                                                            // $button="Nonaktifkan Data";
-                                                            $icon="switch";
-                                                            $class="danger";
-                                                    }elseif($g->hasil=='Perpanjang'){
-                                                            echo "<span class='label label-primary'> Perpanjang</span>";
-                                                            // $button="Aktifkan Data";
-                                                            $icon="switch";
-                                                            $class="info";
-                                                    }?>
-                                            </td>
-                                        </td>
-                                        <td>
-                                        <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn btn-primary btn-xs"  data-placement="top"  title="info"><i class="fa fa-exclamation"></i> Info</a>
+                                      <td><?php echo $no; ?>
+                                      <td><?php echo $g->NIP; ?></td>
+                                      <td><?php echo $g->nama_karyawan; ?></td>
+                                      <td><?php echo $g->nilai_perpanjang; ?></td>
+                                      <td><?php echo $g->nilai_tidak; ?> <input type="hidden" value="<?=$g->kirim;?>" name="kirim"> </td> 
+                                      <td><?php echo "<span class='label label-success'>$g->hasil</span>"; ?></td>
+                                      <td>
+                                      <?php if($g->kirim==1){
+                                                      echo "<span class='label label-warning'> Blm Verified</span>";
+                                                      //$teks="Nonaktifkan Data";
+                                                      $icon="switch";
+                                                      $class="danger";
+                                              }elseif($g->kirim==2){
+                                                      echo "<span class='label label-primary'> Verified HRD</span>";
+                                                      //$teks="Aktifkan Data";
+                                                      $icon="switch";
+                                                      $class="info";
+                                              }elseif($g->kirim==3){
+                                                      echo "<span class='label label-danger'> Tinjau ADMIN</span>";
+                                                      //$teks="Aktifkan Data";
+                                                      $icon="switch";
+                                                      $class="info";
+                                              }else{
+                                              }?>
+                                      </td>               
+                                      <td><?php echo $g->tgl_kontrak; ?></td>
+                                      <td>
+                                          <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
                                     </tr>
                                         <?php endforeach;?>
                                 </tbody>
@@ -92,7 +91,7 @@
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 col-xs-12">
                                             <div class="info-box bg-aqua">
-                                            <a href="<?php echo base_url('Hasil_seleksi') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-list-alt"></i></a>
+                                            <a href="<?php echo base_url('History_k') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-list-alt"></i></a>
                                                 <div class="info-box-content">
                                                 <span class="info-box-text">Jumlah Data Terseleksi</span>
                                                 <span class="info-box-number"><?= $selekdat; ?> Karyawan</span>
@@ -111,10 +110,10 @@
                                         <!-- /.col -->
                                         <div class="col-md-3 col-sm-6 col-xs-12">
                                             <div class="info-box bg-green">
-                                            <a href="<?php echo base_url('Hasil_seleksi/perpanjang') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-edit"></i></a>
+                                            <a href="<?php echo base_url('History_k/perpanjang') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-edit"></i></a>
                                                 <div class="info-box-content">
                                                 <span class="info-box-text">Diperpanjang</span>
-                                                <span class="info-box-number"><?= $perpanjang; ?> Karyawan</span>
+                                                <span class="info-box-number"><?= $perpanjang_list; ?> Karyawan</span>
 
                                                 <div class="progress">
                                                     <div class="progress-bar" style="width: <?= $perpanjang; ?>0%"></div>
@@ -130,7 +129,7 @@
                                         <!-- /.col -->
                                         <div class="col-md-3 col-sm-6 col-xs-12">
                                             <div class="info-box bg-yellow">
-                                            <a href="<?php echo base_url('Hasil_seleksi/tidak') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-floppy-remove"></i></a>
+                                            <a href="<?php echo base_url('History_k/tidak') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-floppy-remove"></i></a>
                                                 <div class="info-box-content">
                                                 <span class="info-box-text">Tidak Perpanjang</span>
                                                 <span class="info-box-number"><?= $tidak; ?> Karyawan</span>

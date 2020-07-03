@@ -14,23 +14,23 @@ class M_HAdmin extends CI_Model {
 			$query = $this->db->get('data_seleksi');
 			return $query->result();
 		}
-	function hitperpanjang($hasil = 'Perpanjang')
+	function hitperpanjang()
 		{
 			$this->db->select('data_seleksi.*');
-			$this->db->where('hasil', $hasil);
 			$query = $this->db->get('data_seleksi');
 			return $query->num_rows();
 		}
-	function history($hasil = 'Perpanjang')
+	function history()
 		{
 			$this->db->select('data_seleksi.*');
-			$this->db->where('hasil', $hasil);
+			$this->db->order_by('kirim','ASC');
 			$query = $this->db->get('data_seleksi');
 			return $query->result();
 		}
-	function hasil_pred()
+	function hasil_pred($kirim = 1)
 		{
 			$this->db->select('data_seleksi.*');
+			$this->db->where('kirim', $kirim);
 			$query = $this->db->get('data_seleksi');
 			return $query->result();
 		}
@@ -41,19 +41,19 @@ class M_HAdmin extends CI_Model {
 			return $query->num_rows();
 		}
 	function Hasil_perpan($hasil = 'Perpanjang')
-	{
-		$this->db->select('data_seleksi.*');
-		$this->db->where('hasil', $hasil);
-		$query = $this->db->get('data_seleksi');
-		return $query->num_rows();
-	}
+		{
+			$this->db->select('data_seleksi.*');
+			$this->db->where('hasil', $hasil);
+			$query = $this->db->get('data_seleksi');
+			return $query->num_rows();
+		}
 	function Hasil_tidak($hasil = 'Tidak diperpanjang')
-	{
-		$this->db->select('data_seleksi.*');
-		$this->db->where('hasil', $hasil);
-		$query = $this->db->get('data_seleksi');
-		return $query->num_rows();
-	}
+		{
+			$this->db->select('data_seleksi.*');
+			$this->db->where('hasil', $hasil);
+			$query = $this->db->get('data_seleksi');
+			return $query->num_rows();
+		}
 	function Listperpanjang($hasil = 'Perpanjang')
 		{
 			$this->db->select('data_seleksi.*');
@@ -82,9 +82,35 @@ class M_HAdmin extends CI_Model {
 		}
 
 	function delete($params ='')
-    {
-        $sql = "DELETE  FROM data_seleksi WHERE NIP = ? ";
-        return $this->db->query($sql, $params);	
-    }
+		{
+			$sql = "DELETE  FROM data_seleksi WHERE NIP = ? ";
+			return $this->db->query($sql, $params);	
+		}
 
+	// info hasil Seleksi
+	function hasil_seleksi($kirim = 1)
+		{
+			$this->db->select('data_seleksi.*');
+			$this->db->where('kirim', $kirim);
+			$query = $this->db->get('data_seleksi');
+			return $query->num_rows();
+		}
+
+	function hasil_perpanjang($hasil = 'Perpanjang',$kirim = '1')
+		{
+			$this->db->select('data_seleksi.*');
+			$this->db->where('hasil', $hasil);
+			$this->db->where('kirim', $kirim);
+			$query = $this->db->get('data_seleksi');
+			return $query->num_rows();
+		}
+	function hasil_tidakP($hasil = 'Tidak diperpanjang',$kirim = '1')
+		{
+			$this->db->select('data_seleksi.*');
+			$this->db->where('hasil', $hasil);
+			$this->db->where('kirim', $kirim);
+			$query = $this->db->get('data_seleksi');
+			return $query->num_rows();
+		}
+	
 }

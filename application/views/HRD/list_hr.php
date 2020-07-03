@@ -35,14 +35,27 @@
                                     <tbody>
                                      <?php $no= 0; foreach ($list as $g ): $no++;?>
                                   <tr>
-                                    <td><?php echo $no; ?> <input type="hidden" value="<?=$g->NIP;?>" name="NIP"></td>
+                                    <td><?php echo $no; ?>
                                     <td><?php echo $g->nama_karyawan; ?></td>
                                     <td><?php echo $g->nilai_perpanjang; ?></td>
-                                    <td><?php echo $g->nilai_tidak; ?> <input type="hidden" value="<?=$g->kirim;?>" name="kirim"> </td> 
-                                    <td><?php echo "<span class='label label-success'>$g->hasil</span>"; ?></td>
+                                    <td><?php echo $g->nilai_tidak; ?> 
                                     <td>
-                                    <?php if($g->kirim==0){
-                                                    echo "<span class='label label-warning'> Blm Verified</span>";
+                                    <?php if($g->hasil=='Perpanjang'){
+                                                    echo "<span class='label label-success'>$g->hasil</span>";
+                                                    //$teks="Nonaktifkan Data";
+                                                    $icon="switch";
+                                                    $class="danger";
+                                            }elseif($g->hasil=='Tidak diperpanjang'){
+                                                    echo "<span class='label label-warning'>$g->hasil</span>";
+                                                    //$teks="Aktifkan Data";
+                                                    $icon="switch";
+                                                    $class="info";
+                                            }else{
+                                            }?>
+                                    </td>
+                                    <td>
+                                    <?php if($g->kirim==3){
+                                                    echo "<span class='label label-warning'> Tinjau ADMIN</span>";
                                                     //$teks="Nonaktifkan Data";
                                                     $icon="switch";
                                                     $class="danger";
@@ -52,18 +65,20 @@
                                                     $icon="switch";
                                                     $class="info";
                                             }else{
-                                                    echo "<label class='label label-primary> Lainnya</label>";
-                                                    //$teks="Aktifkan Data";
-                                                    $icon="switch";
-                                                    $class="default";
                                             }?>
                                     </td>        
                                     <td><?php echo $g->tgl_kontrak; ?></td>
                                     <td>
-
-                                     <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
-                                     <a type="button" href="<?= base_url('Kontrak_lap/kontrak/'.$g->NIP);?>" target="_blank" class="btn bg-blue btn-xs" data-placement="top"  title="Kontrak"><i class="fa fa-pencil-square-o"></i> Kontrak</a>
-                                     <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn bg-olive btn-xs"  data-placement="top"  title="Verifikasi Kontrak"><i class="fa fa-paint-brush"></i> Verifikasi</a>
+                                    <?php if ($g->hasil=='Perpanjang') { ?>
+                                        <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
+                                        <a type="button" href="<?= base_url('Kontrak_lap/kontrak/'.$g->NIP);?>" target="_blank" class="btn bg-blue btn-xs" data-placement="top"  title="Kontrak"><i class="fa fa-pencil-square-o"></i> Kontrak</a>
+                                        <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn bg-olive btn-xs"  data-placement="top"  title="Verifikasi Kontrak"><i class="fa fa-paint-brush"></i> Verifikasi</a>
+                                    <?php } elseif ($g->hasil=='Tidak diperpanjang' ) { ?>
+                                        <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
+                                        <a type="button" href="<?= base_url('Kontrak_lap/end_kontrak/'.$g->NIP);?>" target="_blank" class="btn bg-red-gradient btn-xs" data-placement="top"  title="end Kontrak"><i class="fa fa-arrows-alt"></i> End Kontrak</a>
+                                        <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn bg-olive btn-xs"  data-placement="top"  title="Verifikasi Kontrak"><i class="fa fa-paint-brush"></i> Verifikasi</a>
+                                                <?php } else { ?>
+                                                <?php } ?>
                                   </tr>
 
                                     <?php endforeach;?>

@@ -3,7 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_HR extends CI_Model {
 	
-	function get_notif($hasil = 'Perpanjang',$kirim= 1 )
+	function get_notif($kirim= 1 )
+	{
+		$this->db->select('data_seleksi.*');
+		$this->db->where('kirim', $kirim);
+		$query = $this->db->get('data_seleksi');
+		return $query->num_rows();
+	}
+
+	function get_notifen($hasil = 'Tidak diperpanjang',$kirim= 3)
 	{
 		$this->db->select('data_seleksi.*');
 		$this->db->where('hasil', $hasil);
@@ -12,16 +20,24 @@ class M_HR extends CI_Model {
 		return $query->num_rows();
 	}
 
-	function get_hasilkrm($hasil = 'Perpanjang',$kirim= 1)
+	function get_hasilkrm($kirim= 1)
     {
+		$this->db->select('data_seleksi.*');
+		$this->db->where('kirim', $kirim);
+		$query = $this->db->get('data_seleksi');
+		return $query->result();
+	}
+	
+	function get_new($hasil = 'Perpanjang',$kirim= 3)
+	{
 		$this->db->select('data_seleksi.*');
 		$this->db->where('hasil', $hasil);
 		$this->db->where('kirim', $kirim);
 		$query = $this->db->get('data_seleksi');
 		return $query->result();
 	}
-	
-	function get_new($hasil = 'Perpanjang',$kirim= 2)
+
+	function get_end($hasil = 'Tidak diperpanjang',$kirim= 3)
 	{
 		$this->db->select('data_seleksi.*');
 		$this->db->where('hasil', $hasil);
@@ -83,10 +99,9 @@ class M_HR extends CI_Model {
 		return ($sql->num_rows() < 1)?'NO_DATA_QUERY':$sql->result_array();
 	}
 
-	function cetakHR($hasil = 'Perpanjang',$kirim= 2)
+	function cetakHR($kirim= 3)
 	{
 		$this->db->select('data_seleksi.*');
-		$this->db->where('hasil', $hasil);
 		$this->db->where('kirim', $kirim);
 		$query = $this->db->get('data_seleksi');
 		return $query->result();

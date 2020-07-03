@@ -17,6 +17,7 @@ class New_kontrak extends AUTH_Controller {
 	{	
         $data['list']				=$this->M_HR->get_new();
         $data['notif']				=$this->M_HR->get_notif();
+        $data['notifend']			=$this->M_HR->get_notifen();
 		$data['content'] 			='HRD/sdh_kontrak';
 		$data['userdata'] 			= $this->userdata;
         $this->load->view($this->template, $data);	
@@ -64,5 +65,14 @@ class New_kontrak extends AUTH_Controller {
             $this->session->set_flashdata('notif', '<p style="color:green;font-weight:bold;">'.$total_post.' data berhasil di sunting!</p>');
             redirect('New_kontrak');
         }
+
+    function end_kontrak()
+	{	
+        $data['list']				=$this->M_HR->get_end();
+        $data['notif']				=$this->M_HR->get_notif();
+		$data['content'] 			='HRD/list_akhirkontrak';
+		$data['userdata'] 			= $this->userdata;
+        $this->load->view($this->template, $data);	
+	}
 
 }

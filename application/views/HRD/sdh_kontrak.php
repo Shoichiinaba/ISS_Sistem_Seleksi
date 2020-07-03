@@ -62,7 +62,7 @@
                                     <td><?php echo $g->nama_karyawan; ?></td>
                                     <td><?php echo "<span class='label label-success'>$g->hasil</span>"; ?></td>
                                     <td>
-                                    <?php if($g->kirim==2){
+                                    <?php if($g->kirim==3){
                                                     echo "<span class='label label-danger'> Sudah TTD Kontrak</span>";
                                                     //$teks="Nonaktifkan Data";
                                                     $icon="switch";
@@ -86,7 +86,7 @@
                                                     //$teks="Nonaktifkan Data";
                                                     $icon="switch";
                                                     $class="purple";
-                                            }elseif($g->kirim==2){
+                                            }elseif($g->kirim==3){
                                                     echo "<span class='label label-primary'> Verified HRD</span>";
                                                     //$teks="Aktifkan Data";
                                                     $icon="switch";
@@ -117,6 +117,11 @@
                                               <button type="submit" class="btn btn-danger" name="hapus">
                                               <i class="fa fa-trash-o"> Hapus</i>
                                               </button>
+                                              <a href="<?= base_url('New_kontrak/end_kontrak/');?>"> 
+                                                <button type="button" class="btn bg-yellow margin">
+                                                <i  class="fa fa-sign-out"></i>&nbsp; Data End Kontrak <i class=" label bg-blue pull-righ"><?php echo $notifend; ?></i>
+                                                </button>
+                                              </a>
                                             </div>
                                           </div>
                                         </div>

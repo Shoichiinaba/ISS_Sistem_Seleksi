@@ -13,40 +13,11 @@ class Hasil_seleksi extends AUTH_Controller {
 	{
 		$data['list']				=$this->M_HAdmin->hasil_pred();
 		$data['perpanjang']			=$this->M_HAdmin->hitperpanjang();
-		$data['selekdat']			=$this->M_HAdmin->hasil_hit();
-		$data['perpanjang']			=$this->M_HAdmin->Hasil_perpan();
-		$data['tidak']			=$this->M_HAdmin->Hasil_tidak();
+		$data['has_sel']			=$this->M_HAdmin->hasil_seleksi();
+		$data['has_per']			=$this->M_HAdmin->hasil_perpanjang();
+		$data['has_en']				=$this->M_HAdmin->hasil_tidakP();
 		$data['content'] 			= 'admin/Hasil_seleksi';
 		$data['userdata'] 			= $this->userdata;
         $this->load->view($this->template, $data);	
 	}
-
-	function perpanjang()
-	{
-		$data['list']				=$this->M_HAdmin->Listperpanjang();
-		$data['perpanjang']			=$this->M_HAdmin->hitperpanjang();
-		$data['tidak']				=$this->M_HAdmin->Hasil_tidak();
-		$data['selekdat']			=$this->M_HAdmin->hasil_hit();
-		$data['perpanjang']			=$this->M_HAdmin->Hasil_perpan();
-		$data['content'] 			= 'admin/Perpanjang';
-		$data['userdata'] 			= $this->userdata;
-        $this->load->view($this->template, $data);	
-	}
-	function tidak()
-	{
-		$data['list']				=$this->M_HAdmin->Tperpanjang();
-		$data['perpanjang']			=$this->M_HAdmin->hitperpanjang();
-		$data['selekdat']			=$this->M_HAdmin->hasil_hit();
-		$data['perpanjang']			=$this->M_HAdmin->Hasil_perpan();
-		$data['tidak']				=$this->M_HAdmin->Hasil_tidak();
-		$data['content'] 			= 'admin/Tidak_p';
-		$data['userdata'] 			= $this->userdata;
-        $this->load->view($this->template, $data);	
-	}
-	function delete($params = '') {
-        $this->M_HAdmin->delete($params);
-        $this->session->set_flashdata('sukses',"Berhasil Di Hapus");
-        return redirect('Hasil_seleksi');
-    }
-	
 }

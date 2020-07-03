@@ -75,7 +75,7 @@
                                                             $icon="switch";
                                                             $class="danger";
                                                     }elseif($g->hasil=='Perpanjang'){
-                                                            echo "<span class='label label-primary'> Perpanjang</span>";
+                                                            echo "<span class='label label-success'> Perpanjang</span>";
                                                             // $button="Aktifkan Data";
                                                             $icon="switch";
                                                             $class="info";
@@ -83,16 +83,7 @@
                                             </td>
                                         </td>
                                         <td>
-                                                    
-                                        <?php if ($g->hasil=='Tidak diperpanjang') { ?>
                                             <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn btn-primary btn-xs"  data-placement="top"  title="info"><i class="fa fa-exclamation"></i> Info</a>
-                                            <a href="<?php echo site_url('Hasil_seleksi/delete/'.$g->NIP); ?>" onclick="return confirm('Apakah Anda Ingin Menghapus Data Ini');"type="button" class="btn btn-danger btn-xs"  data-placement="top"  title="Hapus"><i class="fa fa-trash-o"></i></a>
-                                        <?php } elseif ($g->hasil=='Perpanjang') { ?>
-                                            <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn btn-primary btn-xs"  data-placement="top"  title="info"><i class="fa fa-exclamation"></i> Info</a>
-                                            <a type="button" class="btn btn-success btn-xs"  data-placement="top"  title="Terkirim ke HRD" disabled>Terkirim HRD</a>
-                                        <?php } else { ?>
-                                        <?php } ?>
-
                                     </tr>
                                         <?php endforeach;?>
                                 </tbody>
@@ -118,90 +109,52 @@
                                         <div id="calendar" style="width: 100%"></div>
                                         </div>
                                     <!-- /.box-body -->
-                                    <div class="box-footer text-black">
-                                      
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <div class="info-box bg-aqua">
-                                            <a href="<?php echo base_url('Hasil_seleksi') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-list-alt"></i></a>
-                                                <div class="info-box-content">
-                                                <span class="info-box-text">Jumlah Data Terseleksi</span>
-                                                <span class="info-box-number"><?= $selekdat; ?> Karyawan</span>
+                                      <div class="box-footer text-black">
+              
+                                        <div class="box-footer no-border">
+                                          <div class="row">
+                                              <div class="progress-group">
+                                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                                    <span class="progress-text">Data Hasil Seleksi</span>
+                                                    <span class="progress-number"><b><?= $has_sel; ?></b>/<?= $has_sel; ?></span>
+                                                    
+                                                    <div class="progress sm">
+                                                      <div class="progress-bar progress-bar-aqua" style="width: <?= $has_sel; ?>00%"></div>
+                                                    </div>
+                                                </div>
+                                              </div>    
+                                                  <!-- /.progress-group -->
+                                              <div class="progress-group">
+                                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                                  <span class="progress-text">Seleksi Diperpanjang</span>
+                                                  <span class="progress-number"><b><?=$has_per?></b>/ <?=$has_sel?></span>
 
-                                                <div class="progress">
-                                                    <div class="progress-bar" style="width: 100%"></div>
+                                                  <div class="progress sm">
+                                                    <div class="progress-bar progress-bar-green" style="width: <?= $has_per ?>%"></div>
+                                                  </div>
                                                 </div>
-                                                    <span class="progress-description">
-                                                    <?= $selekdat; ?> Karyawan Diseleksi
-                                                    </span>
+                                              </div>
+                                                  <!-- /.progress-group -->
+                                              <div class="progress-group">
+                                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                                  <span class="progress-text">Seleksi Tidak DiPerpanjang</span>
+                                                  <span class="progress-number"><b><?= $has_en?></b>/ <?= $has_sel?></span>
+
+                                                  <div class="progress sm">
+                                                    <div class="progress-bar progress-bar-yellow" style="width: <?= $has_en?>%"></div>
+                                                  </div>
                                                 </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
+                                              </div>
+                                                <!-- /.progress-group -->
+                                          </div>
+                                          <!-- /.row -->
                                         </div>
-                                        <!-- /.col -->
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <div class="info-box bg-green">
-                                            <a href="<?php echo base_url('Hasil_seleksi/perpanjang') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-edit"></i></a>
-                                                <div class="info-box-content">
-                                                <span class="info-box-text">Diperpanjang</span>
-                                                <span class="info-box-number"><?= $perpanjang; ?> Karyawan</span>
-
-                                                <div class="progress">
-                                                    <div class="progress-bar" style="width: <?= $perpanjang; ?>0%"></div>
-                                                </div>
-                                                    <span class="progress-description">
-                                                    <?= $perpanjang;?> % Karyawan
-                                                    </span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <div class="info-box bg-yellow">
-                                            <a href="<?php echo base_url('Hasil_seleksi/tidak') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-floppy-remove"></i></a>
-                                                <div class="info-box-content">
-                                                <span class="info-box-text">Tidak Perpanjang</span>
-                                                <span class="info-box-number"><?= $tidak; ?> Karyawan</span>
-
-                                                <div class="progress">
-                                                <div class="progress-bar" style="width: <?= $tidak; ?>0%"></div>
-                                                </div>
-                                                    <span class="progress-description">
-                                                    <?= $tidak; 0?> % Karyawan
-                                                    </span>
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                        <!-- /.info-box -->
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <div class="info-box bg-red">
-                                            <a href="<?php echo base_url('Laporan_ADM/laporanall/')?>" target="_blank" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-print"></i></a>
-                                                <div class="info-box-content">
-                                                <span class="info-box-text">Cetak Laporan</span>
-                                                
-                                                </div>
-                                                <!-- /.info-box-content -->
-                                            </div>
-                                            <!-- /.info-box -->
-                                            </div>
-                                            <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
-
-                                    </div>
-                                      <!-- /.row -->
+                                      </div>
+                                  <!-- /.box -->
                                 </div>
                             </div>
-                                  <!-- /.box -->
                         </div>
                     </div>
-                </div>
-            </div>
         </div>
     </div>   
 </div> 

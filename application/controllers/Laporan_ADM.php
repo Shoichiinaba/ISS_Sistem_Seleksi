@@ -157,9 +157,9 @@ class Laporan_ADM extends CI_Controller {
             $pdf->Image(base_url(). "assets/img/logolog.png",85,50,'L');
             $pdf->SetTextColor(0);
             $pdf->SetDrawColor(8,8,8);
-            $header = array('NIP','Nama Karyawan','Penampilan','Kelengkapan','Kehadiran','Accident','Knowlage','Tanggung Jawab','Teamwork','Best employee','Penilaian','Hasil','Tanggal Kontrak');
+            $header = array('NIP','Nama Karyawan','Penampilan','Kelengkapan','Kehadiran','Accident','Knowlage','Tanggung Jawab','Teamwork','Best employee','Penilaian','Hasil','Tanggal End Kontrak');
             // Lebar Header Sesuaikan Jumlahnya dengan Jumlah Field Tabel Database
-        $w = array(22,40,22,27,27,22,22,29,22,27,22,27,27);
+        $w = array(22,40,22,27,27,22,22,29,22,27,22,27,29);
             for($i=0;$i<count($header);$i++)
             $pdf->Cell($w[$i],7,$header[$i],1,0,'C',true);
             $pdf->Ln();
@@ -183,7 +183,7 @@ class Laporan_ADM extends CI_Controller {
                 $pdf->Cell($w[3],6,$row->best_employee,'LR',0,'C',$fill);
                 $pdf->Cell($w[10],6,$row->nilai_perpanjang,'LR',0,'C',$fill);
                 $pdf->Cell($w[3],6,$row->hasil,'LR',0,'C',$fill);
-                $pdf->Cell($w[3],6,$row->tgl_kontrak,'LR',0,'C',$fill);
+                $pdf->Cell($w[7],6,$row->tgl_kontrak,'LR',0,'C',$fill);
             
 
                 $pdf->Ln();

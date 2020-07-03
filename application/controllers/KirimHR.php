@@ -28,7 +28,7 @@ class KirimHR extends AUTH_Controller {
 			redirect('KirimHR');
 		}else{
 			$NIP 					= $this->input->post('NIP');
-			$kirim         			= 2;
+			$kirim         			= 3;
         $troop_ = array(
          'NIP' 					    =>  $NIP,
          'kirim' 					=>  $kirim,
@@ -78,7 +78,7 @@ class KirimHR extends AUTH_Controller {
 			redirect('KirimHR');
 		}else{
 			$NIP 					= $this->input->post('NIP');
-			$kirim         			= 3;
+			$kirim         			= 2;
         $troop_ = array(
          'NIP' 					    =>  $NIP,
          'kirim' 					=>  $kirim,

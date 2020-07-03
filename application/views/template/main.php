@@ -30,6 +30,7 @@
         <!-- DataTables -->
         <link href="<?php echo base_url('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'); ?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/bower_components/bootstrap-slider/slider.css'); ?>" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url('assets/bower_components/morris.js/morris.css'); ?>" rel="stylesheet" type="text/css" />
 
         
         <!-- jQuery 3 -->
@@ -65,7 +66,6 @@
     
        <script src="<?php echo base_url('assets/bower_components/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
        <script src="<?php echo base_url('assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js'); ?>"></script>
-       
 <script>
   $(function () {
     $('#example1').DataTable()
@@ -80,3 +80,4 @@
   })
 </script>
 </html>
+
