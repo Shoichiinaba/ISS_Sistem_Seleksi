@@ -61,8 +61,8 @@
                                     <td><?php echo $g->tgl_kontrak; ?></td>
                                     <td>
 
-                                     <a type="button" href="<?= base_url('Kontrak_lap/kontrak/'.$g->NIP);?>" target="_blank" class="btn bg-blue btn-xs" data-placement="top"  title="Kontrak"><i class="fa fa-pencil-square-o"></i> Kontrak</a>
                                      <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
+                                     <a type="button" href="<?= base_url('Kontrak_lap/kontrak/'.$g->NIP);?>" target="_blank" class="btn bg-blue btn-xs" data-placement="top"  title="Kontrak"><i class="fa fa-pencil-square-o"></i> Kontrak</a>
                                      <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn bg-olive btn-xs"  data-placement="top"  title="Verifikasi Kontrak"><i class="fa fa-paint-brush"></i> Verifikasi</a>
                                   </tr>
 
@@ -151,6 +151,8 @@
         </div>
         <?php endforeach;?>
 
+
+          <!-- verifikasi -->
         <?php $no=  0; foreach($list as $g  ): $no++;?>
   <div class="modal modal-success fade" id="modal-info<?=$g->NIP;?>">
           <div class="modal-dialog">

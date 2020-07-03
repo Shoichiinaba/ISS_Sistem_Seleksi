@@ -112,5 +112,56 @@ class tentukan_bantuan extends AUTH_Controller {
 		$data['naive'] 			= $bayes;
 		$this->load->view($this->template, $data);
 	}
+
+	function hitung_data(){
+    	$this->load->model('M_naive');
+    	$this->load->library('naive_bayes');
+
+    	$data_training = $this->M_naive;
+
+    	$data_training->parameter('penampilan', 'kelengkapan', 'kehadiran', 'accident', 'knowlage', 'tanggung_jawab', 'teamwork', 'best_employee', 'hasil');
+		$data_training->Get();
+
+		$algoritma = $this->naive_bayes;
+		$algoritma->data = $data_training->tampil_data();
+		$algoritma->data_kategori = $data_training->tampil_data_kategori();
+		$algoritma->set_class('hasil');
+		
+		$nama = $this->input->get('nama');
+		$p1 = $this->input->get('penampilan');
+		$p2 = $this->input->get('kelengkapan');
+		$p3 = $this->input->get('kehadiran');
+		$p4 = $this->input->get('accident');
+		$p5 = $this->input->get('knowlage');
+		$p6 = $this->input->get('tanggung_jawab');
+		$p7 = $this->input->get('teamwork');
+		$p8 = $this->input->get('best_employee');
+
+		$import[0]=array($p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8);
+
+		for($i=0; $i<count($import); $i++){
+			$d = $import[$i];
+			$algoritma->data_set($d[0], $d[1], $d[2], $d[3], $d[4], $d[5], $d[6], $d[7]);
+			$perhitungan = $algoritma->mining();
+			$data_out = array(
+				'nama'=>$nama,
+				'input'=>$d,
+				'hasil'=>$perhitungan
+			);
+			echo json_encode($data_out);
+		}
+    }
+    function simpan_perhitungan(){
+    	$this->load->model('M_HAdmin');
+    	$data_form = $_GET['data_form'];
+    	$hasil = $_GET['hasil'];
+		$nama = $_GET['nama'];
+		$NIP = $_GET['NIP'];
+    	$r = $this->M_HAdmin->simpan_hasil_perhitungan($data_form, $hasil, $nama, $NIP);
+    	echo json_encode(array( 
+    		'respon' => $r,
+    		'status' => ($r) ? 200 : 404
+    	 ));
+    }
 	
 }

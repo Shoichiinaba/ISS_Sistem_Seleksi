@@ -1,7 +1,7 @@
 <?php if ($this->session->flashdata('sukses')):?>
           <script>
             swal({
-              title: 'Data Latih!!',
+              title: 'DATA KARYAWAN!!',
               text: "<?php echo $this->session->flashdata('sukses');?>",
               type: 'success'
             });
@@ -50,7 +50,7 @@
                                                     <th width ='7%'>Hasil</th>
                                                     <th width ='7%'>Status HRD</th>
                                                     <th width ='8%'>Tgl Dikontrak</th>
-                                                    <th width ='8%'>Action</th>
+                                                    <th width ='12%'>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -73,16 +73,26 @@
                                                             //$teks="Aktifkan Data";
                                                             $icon="switch";
                                                             $class="info";
-                                                    }else{
-                                                            echo "<label class='label label-primary> Lainnya</label>";
+                                                    }elseif($g->kirim==3){
+                                                            echo "<span class='label label-danger'> Tinjau ADMIN</span>";
                                                             //$teks="Aktifkan Data";
                                                             $icon="switch";
-                                                            $class="default";
+                                                            $class="info";
+                                                    }else{
                                                     }?>
                                             </td>               
                                             <td><?php echo $g->tgl_kontrak; ?></td>
                                             <td>
-                                            <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
+                                            <?php if ($g->kirim=='1') { ?>
+                                                <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
+                                                <a type="button" data-toggle="modal" data-target="#modal-danger<?=$g->NIP;?>" class="btn bg-red btn-xs"  data-placement="top"  title="Tarik Data"><i class="fa fa-exchange"></i> Tarik Pengiriman</a>
+                                            <?php } elseif ($g->kirim=='2' ) { ?>
+                                                <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
+                                            <?php } elseif ($g->kirim=='3' ) { ?>
+                                                <a type="button" data-toggle="modal" data-target="#modal-success<?=$g->NIP;?>" class="btn bg-purple btn-xs"  data-placement="top"  title="Detail"><i class="fa fa-newspaper-o"></i> Detail</a>
+                                                <a type="button" data-toggle="modal" data-target="#modal-ulang<?=$g->NIP;?>" class="btn bg-yellow btn-xs"  data-placement="top"  title="Kirim Ulang"><i class="fa fa-refresh"></i> Kirim Ulang</a>
+                                                          <?php } else { ?>
+                                                          <?php } ?>
                                         </tr>
 
                                             <?php endforeach;?>
@@ -191,4 +201,55 @@
         <?php endforeach;?>
 
 
+<!-- Kirim Ulang -->
+<?php $no=  0; foreach($list as $g  ): $no++;?>
+  <div class="modal modal-warning fade" id="modal-ulang<?=$g->NIP;?>">
+    <div class="modal-dialog">
+      <form action="<?php echo site_url('KirimHR/kirim_ulang'); ?>" method="post">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class='col-md-8'><input type="hidden" value="<?=$g->NIP;?>" name="NIP"></div>
+            <h5>KARYAWAN BERHASIL DI KIRIM ULANG KE HRD</h5>
+            <div class='col-md-8'><input type="hidden" value="<?=$g->kirim;?>" name="kirim"></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-outline">Kirim Ulang</button>
+            </div>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </form>
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<?php endforeach;?>
 
+<!-- Tarik Pengiriman ke HRD -->
+<?php $no=  0; foreach($list as $g  ): $no++;?>
+<div class="modal modal-danger fade" id="modal-danger<?=$g->NIP;?>">
+  <div class="modal-dialog">
+  <form action="<?php echo site_url('KirimHR/Tarik_dariHR'); ?>" method="post">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Peringatan</h4>
+      </div>
+        <div class="modal-body">
+        <h5>KARYAWAN AKAN DI TARIK DARI SISTEM HRD </h5>
+        <h6>Nama karyawan yang di tarik ulang akan hilang dari sistem HRD </h6>
+        <div class='col-md-8'><input type="hidden" value="<?=$g->NIP;?>" name="NIP"></div>
+        <div class='col-md-8'><input type="hidden" value="<?=$g->kirim;?>" name="kirim"></div>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-outline">Tarik Data</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+    </form>
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<?php endforeach;?>

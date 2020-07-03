@@ -17,7 +17,7 @@
               type: 'error'
             });
           </script>
-      <?php endif; ?>
+      <?php endif; ?> 
 
 <div class="content-wrapper">
   <div class="container">
@@ -34,19 +34,19 @@
 
                 <div class="box box-success">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Identitas Pemohon</h3>
+                            <h3 class="box-title">Identitas Karyawan</h3>
                         </div>
-                         <form name="form_" action="<?= base_url('tentukan_bantuan/simpan_predform')?>" method="post">
+                         <form name="form_" id="form" action=" " method="post">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label class='col-md-4'>NIK</label>
+                                    <label class='col-md-4'>NIP</label>
                                     <div class='col-md-7'>
-                                    <input type="text" id="NIK" name="no_kk" placeholder="Masukan No. KK" class="form-control" required="" ></div>
+                                    <input type="text" id="NIP" name="NIP" placeholder="Masukan NIP" class="form-control" required="" ></div>
                                 </div>
                                 <br>
                                 <div class="form-group">
                                     <label class='col-md-4'>Nama Karyawan</label>
-                                    <div class='col-md-7'><input type="text" name="nama" autocomplete="off" placeholder="Nama Penduduk" class="form-control"
+                                    <div class='col-md-7'><input type="text" name="nama" autocomplete="off" placeholder="Nama Karyawan" class="form-control"
                                         required="" ></div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                             <div class="box-header">
                                     <i style = 'color : navy' class="fa fa-sort-numeric-asc"></i>
 
-                                    <a class="box-title" data-toggle="modal" data-target="#modal-tambah" ><b style= 'color: navy'>Data Kategori</h3></b> </a>
+                                    <a class="box-title"><b style= 'color: navy'>Data Kategori</h3></b> </a>
                                     <!-- tools box -->
                                     <div class="pull-right box-tools">
                                     <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
@@ -165,9 +165,10 @@
                 </div>
                     <!-- /.box -->
                     <div class="box-footer">
-                    <button style="float:left;" class="btn btn bg-navy"><i class="fa fa-subscript"> Prediksi</i></button>
+                    <button style="float:left;" class="btn btn bg-green-gradient" id="btn-pre"><i class="fa fa-subscript"> Prediksi</i></button>
                     </div>
             </div>
+            </form>
           </div>
 
           <div class="col-md-6">
@@ -183,7 +184,7 @@
                         <span class="info-box-icon"><i class="glyphicon glyphicon-copy"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Penilaian Perpanjang</span>
-                                <span class="info-box-number">0,5200</span>
+                                <span class="info-box-number" id="perpanjang">0</span>
                             </div>
                             <!-- /.info-box-content -->
                     </div>
@@ -192,16 +193,16 @@
                         <span class="info-box-icon"><i class="glyphicon glyphicon-thumbs-down"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Penilaian Tidak Diperpanjang</span>
-                                <span class="info-box-number">0,3050</span>
+                                <span class="info-box-number" id="tidak-diperpanjang">0</span>
                             </div>
                         <!-- /.info-box-content -->
                     </div>
                     <!-- /.info-box -->
                     <div class="info-box bg-teal">
-                        <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
+                        <span class="info-box-icon"><i class="fa fa-gavel"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Hasil Akhir</span>
-                                <span class="info-box-number">Perpanjang</span>
+                                <span class="info-box-number" id="status"></span>
                             </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -209,11 +210,9 @@
                 </div>
                   <!-- /.box-body -->
                   <div class="box-footer">
-                    <td><a href="<?php echo base_url("tentukan_bantuan/form_bantuan"); ?>">
-                    <button type="button" class="btn bg-orange"><i class="fa fa-houzz">  Reset</i></button>
-                    </td></a>
+                    <button type="button" id="reset" class="btn bg-yellow-gradient"><i class="fa fa-houzz">  Reset</i></button>
 
-                    <button type="submit" class="btn bg-maroon pull-right"><i class="fa fa-save"> Simpan</i></button>
+                    <button type="submit" id="simpan-perhitungan" class="btn bg-maroon-gradient pull-right"><i class="fa fa-share"> Kirim Ke HRD</i></button>
                   </div>
                   <!-- /.box-footer --> 
                 </form>
@@ -224,3 +223,91 @@
       </section> 
   </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    var objek_form = function(){}
+
+    objek_form.prototype.dataG = function(data, hasil, nama){
+        this.data = data;
+        this.hasil = hasil;
+        this.nama = nama;
+    };
+
+    let obj_data = new objek_form();
+
+    $('#btn-pre').click(function(e){
+        e.preventDefault();
+        var data_form = $('#form').serialize();
+        $.ajax({
+            url:"<?=base_url();?>tentukan_bantuan/hitung_data",
+            data:data_form,
+            type:'GET',
+            dataType:'JSON',
+            success:function(response){
+                var hasil = response.hasil,
+                    form_data = response.input,
+                    nama = response.nama;
+                // hasil : digunakan untuk menampilkan nilai hasil perhitungan
+                // form_data : digunakan untuk menampilkan input dari form    
+                var status = hasil.Status,
+                    perpanjang = hasil['nilai']['Perpanjang'],
+                    tidak_diperpanjang =hasil['nilai']['Tidak diperpanjang'];
+
+                $('#perpanjang').html(perpanjang);
+                $('#tidak-diperpanjang').html(tidak_diperpanjang);
+                $('#status').html(status);
+                if(typeof(obj_data) === 'undefined'){
+                    obj_data = new objek_form();
+                }
+                obj_data.dataG( form_data, status, nama );
+            },
+            error:function(err){
+                console.log('Kegagalan pengiriman '+err);
+            },
+            complete:function(xhr, status){
+
+            }
+        });
+    });
+
+    $('#reset').on('click', function(e){
+        e.preventDefault();
+        $('#form')[0].reset();
+        $('#perpanjang').html('0');
+        $('#tidak-diperpanjang').html('0');
+        $('#status').html('');
+    });
+    $('#simpan-perhitungan').on('click', function(){
+        $.ajax({
+            url:'<?=base_url();?>tentukan_bantuan/simpan_perhitungan',
+            data:{
+                nama:obj_data.nama,
+                data_form:obj_data.data,
+                hasil:obj_data.hasil
+            },
+            type:'GET',
+            dataType:'JSON',
+            success:function(res){
+                console.log(res);
+                if(res.status == 200){
+                    swal({
+                        title: 'Data Disimpan',
+                        text: "Sukses",
+                        type: 'success'
+                    });
+                }else{
+                    swal({
+                        title: 'Gagal Disimpan',
+                        text: "Gagal",
+                        type: 'error'
+                    });
+                }
+            },
+            error:function(err){
+                console.log('Request data is failed : '+err);
+            }
+        });
+    });
+});
+</script>

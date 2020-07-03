@@ -62,4 +62,29 @@ class M_HAdmin extends CI_Model {
 			return $query->result();
 		}
 
+	function simpan_hasil_perhitungan($data_form, $hasil, $nama, $NIP){
+			$f = $data_form;
+			$query = "INSERT INTO data_seleksi (NIP,nama_karyawan,penampilan,kelengkapan,kehadiran,accident,knowlage,tanggung_jawab,teamwork,best_employee,hasil) VALUES (
+			'{$NIP}'
+			'{$nama}',
+			'{$f[0]}', 
+			'{$f[1]}',
+			'{$f[2]}',
+			'{$f[3]}',
+			'{$f[4]}',
+			'{$f[5]}',
+			'{$f[6]}',
+			'{$f[7]}',
+			'{$hasil}'
+			)";
+			$sql = $this->db->query($query);
+			return $sql;
+		}
+
+	function delete($params ='')
+    {
+        $sql = "DELETE  FROM data_seleksi WHERE NIP = ? ";
+        return $this->db->query($sql, $params);	
+    }
+
 }

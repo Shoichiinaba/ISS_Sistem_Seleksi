@@ -111,7 +111,7 @@
                                         <!-- /.col -->
                                         <div class="col-md-3 col-sm-6 col-xs-12">
                                             <div class="info-box bg-green">
-                                            <a href="<?php echo base_url('Hasil_seleksi/') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-edit"></i></a>
+                                            <a href="<?php echo base_url('Hasil_seleksi/perpanjang') ?>" style= 'color: white'; class="info-box-icon"><i  class="glyphicon glyphicon-edit"></i></a>
                                                 <div class="info-box-content">
                                                 <span class="info-box-text">Diperpanjang</span>
                                                 <span class="info-box-number"><?= $perpanjang; ?> Karyawan</span>

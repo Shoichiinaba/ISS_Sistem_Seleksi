@@ -43,6 +43,7 @@
                                         <tr>
                                             <th width = '2%'>Pilih</th>
                                             <th width = '3%'>No</th>
+                                            <th width = '5%'>NIP</th>
                                             <th width ='12%'>Nama</th>
                                             <th width ='7%'>Hasil</th>
                                             <th width ='7%'>Status Kontrak</th>
@@ -57,6 +58,7 @@
                                   <tr>
                                     <td><input type="checkbox" name="check[]" value="<?=$g->NIP;?>"></td>
                                     <td><?php echo $no; ?></td>
+                                    <td><?php echo $g->NIP; ?></td>
                                     <td><?php echo $g->nama_karyawan; ?></td>
                                     <td><?php echo "<span class='label label-success'>$g->hasil</span>"; ?></td>
                                     <td>

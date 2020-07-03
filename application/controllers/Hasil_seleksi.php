@@ -43,5 +43,10 @@ class Hasil_seleksi extends AUTH_Controller {
 		$data['userdata'] 			= $this->userdata;
         $this->load->view($this->template, $data);	
 	}
+	function delete($params = '') {
+        $this->M_HAdmin->delete($params);
+        $this->session->set_flashdata('sukses',"Berhasil Di Hapus");
+        return redirect('Hasil_seleksi');
+    }
 	
 }

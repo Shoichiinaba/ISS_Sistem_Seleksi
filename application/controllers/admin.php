@@ -33,6 +33,7 @@ class admin extends AUTH_Controller {
 
 		$data['content']  		= 'admin/daftar';
 		$data['notif']			=$this->M_HR->get_notif();
+		$data['perpanjang']		=$this->M_HAdmin->hitperpanjang();
 		$data['userdata'] 		= $this->userdata;
         $this->load->view($this->template, $data);	
 

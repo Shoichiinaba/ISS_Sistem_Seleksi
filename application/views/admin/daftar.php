@@ -68,7 +68,7 @@
                         <div class="row">
                           <div class="col-xs-4">
                             <button type="submit" class="btn bg-purple btn-block btn-flat">
-                            <i class="fa fa-space-shuttle "> Register</i></button>
+                            <i class="fa fa-registered ">egister</i></button>
                           </div>
                           
                         </div>

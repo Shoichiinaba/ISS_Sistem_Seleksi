@@ -13,7 +13,7 @@
       <?php if ($this->session->flashdata('sukses')):?>
           <script>
             swal({
-              title: 'Data Latih!!',
+              title: 'Data Hasil Seleksi!!',
               text: "<?php echo $this->session->flashdata('sukses');?>",
               type: 'success'
             });
@@ -51,7 +51,7 @@
                                     <th width ='12%'>Team Work</th>
                                     <th width ='10%'>Best Employee</th>
                                     <th width ='10%'>Hasil</th>
-                                    <th width ='6%'>Action</th>
+                                    <th width ='8%'>Action</th>
 
                                 </tr>
                             </thead>
@@ -83,7 +83,16 @@
                                             </td>
                                         </td>
                                         <td>
-                                        <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn btn-primary btn-xs"  data-placement="top"  title="info"><i class="fa fa-exclamation"></i> Info</a>
+                                                    
+                                        <?php if ($g->hasil=='Tidak diperpanjang') { ?>
+                                            <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn btn-primary btn-xs"  data-placement="top"  title="info"><i class="fa fa-exclamation"></i> Info</a>
+                                            <a href="<?php echo site_url('Hasil_seleksi/delete/'.$g->NIP); ?>" onclick="return confirm('Apakah Anda Ingin Menghapus Data Ini');"type="button" class="btn btn-danger btn-xs"  data-placement="top"  title="Hapus"><i class="fa fa-trash-o"></i></a>
+                                        <?php } elseif ($g->hasil=='Perpanjang') { ?>
+                                            <a type="button" data-toggle="modal" data-target="#modal-info<?=$g->NIP;?>" class="btn btn-primary btn-xs"  data-placement="top"  title="info"><i class="fa fa-exclamation"></i> Info</a>
+                                            <a type="button" class="btn btn-success btn-xs"  data-placement="top"  title="Terkirim ke HRD" disabled>Terkirim HRD</a>
+                                        <?php } else { ?>
+                                        <?php } ?>
+
                                     </tr>
                                         <?php endforeach;?>
                                 </tbody>

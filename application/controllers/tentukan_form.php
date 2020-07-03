@@ -18,10 +18,5 @@ class tentukan_form extends AUTH_Controller {
 		$data['userdata'] 		= $this->userdata;
         $this->load->view($this->template, $data);	
 	}
-
-	function simpan_predform()
-	{
-		
-	}
 	
 }

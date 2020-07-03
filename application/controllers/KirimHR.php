@@ -53,6 +53,41 @@ class KirimHR extends AUTH_Controller {
 		}
 
 	}
+
+	function Kirim_ulang()
+	{
+		if($this->input->post()==FALSE){
+			$this->session->set_flashdata('error',"Data Gagal Di Edit");
+			redirect('KirimHR');
+		}else{
+			$NIP 					= $this->input->post('NIP');
+			$kirim         			= 1;
+        $troop_ = array(
+         'NIP' 					    =>  $NIP,
+         'kirim' 					=>  $kirim,
+      );
+        $this->M_HR->verify($NIP,$troop_);
+		$this->session->set_flashdata('sukses',"Berhasil Di Kirim Ulang");
+		redirect('History_k');
+		}
+	}
+	function Tarik_dariHR()
+	{
+		if($this->input->post()==FALSE){
+			$this->session->set_flashdata('error',"Data Gagal Di Tarik");
+			redirect('KirimHR');
+		}else{
+			$NIP 					= $this->input->post('NIP');
+			$kirim         			= 3;
+        $troop_ = array(
+         'NIP' 					    =>  $NIP,
+         'kirim' 					=>  $kirim,
+      );
+        $this->M_HR->verify($NIP,$troop_);
+		$this->session->set_flashdata('sukses',"Berhasil Di Tarik Dari HRD");
+		redirect('History_k');
+		}
+	}
 	
 
 }

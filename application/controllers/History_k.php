@@ -6,8 +6,6 @@ class History_k extends AUTH_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('M_HAdmin');
-		$this->load->model('M_array');
 		$this->load->helper('url');
 	}
 	
