@@ -29,7 +29,7 @@
                                             <th width ='7%'>Hasil</th>
                                             <th width ='7%'>Status</th>
                                             <th width ='8%'>Tgl Dikontrak</th>
-                                            <th width ='14%'>Action</th>
+                                            <th width ='18%'>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

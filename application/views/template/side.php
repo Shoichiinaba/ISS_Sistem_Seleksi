@@ -33,7 +33,7 @@
 
           <li class="treeview <?=$this->uri->segment(1) == 'tentukan_form' || $this->uri->segment(1) == 'tentukan_bantuan' ? 'active' : ''?>">
           <a href="#">
-            <i style= 'color: teal' class="fa fa-strikethrough"></i> <span>Tentukan Penerima Bantuan</span>
+            <i style= 'color: teal' class="fa fa-strikethrough"></i> <span>Seleksi Kontrak</span>
             <span class="pull-right-container">
               <i style= 'color: teal' class="fa fa-angle-left pull-right"></i>
             </span>

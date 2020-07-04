@@ -2,7 +2,7 @@
 <?php if ($this->session->flashdata('sukses')):?>
           <script>
             swal({
-              title: 'Data Prediksi!!',
+              title: 'Data Seleksi!!',
               text: "<?php echo $this->session->flashdata('sukses');?>",
               type: 'success'
             });
@@ -36,12 +36,12 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Identitas Karyawan</h3>
                         </div>
-                         <form name="form_" id="form" action=" " method="post">
+                         <form name="form_" id="form" action="<?= base_url('tentukan_bantuan/simpan_predform')?>" method="post">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label class='col-md-4'>NIP</label>
                                     <div class='col-md-7'>
-                                    <input type="text" id="NIP" name="NIP" placeholder="Masukan NIP" class="form-control" required="" ></div>
+                                    <input type="text" id="NIP" name="nip" placeholder="Masukan NIK" class="form-control" required="" ></div>
                                 </div>
                                 <br>
                                 <div class="form-group">
@@ -56,7 +56,7 @@
                             <div class="box-header">
                                     <i style = 'color : navy' class="fa fa-sort-numeric-asc"></i>
 
-                                    <a class="box-title"><b style= 'color: navy'>Data Kategori</h3></b> </a>
+                                    <a class="box-title" data-toggle="modal" data-target="#modal-tambah" ><b style= 'color: navy'>Data Kategori</h3></b> </a>
                                     <!-- tools box -->
                                     <div class="pull-right box-tools">
                                     <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
@@ -165,7 +165,7 @@
                 </div>
                     <!-- /.box -->
                     <div class="box-footer">
-                    <button style="float:left;" class="btn btn bg-green-gradient" id="btn-pre"><i class="fa fa-subscript"> Prediksi</i></button>
+                    <button style="float:left;" class="btn btn bg-green-gradient" id="btn-pre"><i class="fa fa-subscript"> Seleksi</i></button>
                     </div>
             </div>
             </form>
@@ -175,7 +175,7 @@
           <!-- Horizontal Form -->
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Informasi Hasil Prediksi</h3>
+                  <h3 class="box-title">Informasi Hasil Seleksi</h3>
                 </div>
                 <!-- form start -->
                 
@@ -199,7 +199,7 @@
                     </div>
                     <!-- /.info-box -->
                     <div class="info-box bg-teal">
-                        <span class="info-box-icon"><i class="fa fa-gavel"></i></span>
+                        <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Hasil Akhir</span>
                                 <span class="info-box-number" id="status"></span>
@@ -228,10 +228,13 @@ $(document).ready(function(){
 
     var objek_form = function(){}
 
-    objek_form.prototype.dataG = function(data, hasil, nama){
+    objek_form.prototype.dataG = function(data, hasil, nama, nip, perpanjang, tidak_diperpanjang){
         this.data = data;
         this.hasil = hasil;
         this.nama = nama;
+        this.nip = nip;
+        this.perpanjang = perpanjang;
+        this.tidak_diperpanjang = tidak_diperpanjang;
     };
 
     let obj_data = new objek_form();
@@ -247,6 +250,7 @@ $(document).ready(function(){
             success:function(response){
                 var hasil = response.hasil,
                     form_data = response.input,
+                    nip = response.nip,
                     nama = response.nama;
                 // hasil : digunakan untuk menampilkan nilai hasil perhitungan
                 // form_data : digunakan untuk menampilkan input dari form    
@@ -260,7 +264,9 @@ $(document).ready(function(){
                 if(typeof(obj_data) === 'undefined'){
                     obj_data = new objek_form();
                 }
-                obj_data.dataG( form_data, status, nama );
+                obj_data.dataG( form_data, status, nama, nip, perpanjang, tidak_diperpanjang );
+                
+                
             },
             error:function(err){
                 console.log('Kegagalan pengiriman '+err);
@@ -282,27 +288,32 @@ $(document).ready(function(){
         $.ajax({
             url:'<?=base_url();?>tentukan_bantuan/simpan_perhitungan',
             data:{
+                nip:obj_data.nip,
                 nama:obj_data.nama,
                 data_form:obj_data.data,
-                hasil:obj_data.hasil
+                hasil:obj_data.hasil,
+                perpanjang:obj_data.perpanjang,
+                tidak_diperpanjang:obj_data.tidak_diperpanjang,
+                kirim:1
             },
             type:'GET',
             dataType:'JSON',
             success:function(res){
-                console.log(res);
+                // console.log(res);
                 if(res.status == 200){
                     swal({
-                        title: 'Data Disimpan',
-                        text: "Sukses",
+                        title: 'Data Seleksi Terkirim',
+                        text: "Berhasil",
                         type: 'success'
                     });
                 }else{
                     swal({
-                        title: 'Gagal Disimpan',
+                        title: 'Gagal Terkirim',
                         text: "Gagal",
                         type: 'error'
                     });
                 }
+                
             },
             error:function(err){
                 console.log('Request data is failed : '+err);

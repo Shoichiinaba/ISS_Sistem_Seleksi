@@ -62,10 +62,10 @@ class M_HAdmin extends CI_Model {
 			return $query->result();
 		}
 
-	function simpan_hasil_perhitungan($data_form, $hasil, $nama, $NIP){
+		function simpan_hasil_perhitungan($data_form, $hasil, $nama, $nip, $kirim, $perpanjang, $tidak_diperpanjang, $tgl){
 			$f = $data_form;
-			$query = "INSERT INTO data_seleksi (NIP,nama_karyawan,penampilan,kelengkapan,kehadiran,accident,knowlage,tanggung_jawab,teamwork,best_employee,hasil) VALUES (
-			'{$NIP}'
+			$query = "INSERT INTO `iss_kardb`.`data_seleksi` (`NIP`, `nama_karyawan`, `penampilan`, `kelengkapan`, `kehadiran`, `accident`, `knowlage`, `tanggung_jawab`, `teamwork`, `best_employee`, `nilai_perpanjang`, `nilai_tidak`, `hasil`, `kirim`, `tgl_kontrak`)  VALUES (
+			'{$nip}',
 			'{$nama}',
 			'{$f[0]}', 
 			'{$f[1]}',
@@ -75,7 +75,11 @@ class M_HAdmin extends CI_Model {
 			'{$f[5]}',
 			'{$f[6]}',
 			'{$f[7]}',
-			'{$hasil}'
+			'{$perpanjang}',
+			'{$tidak_diperpanjang}',
+			'{$hasil}',
+			'{$kirim}',
+			'{$tgl}'
 			)";
 			$sql = $this->db->query($query);
 			return $sql;

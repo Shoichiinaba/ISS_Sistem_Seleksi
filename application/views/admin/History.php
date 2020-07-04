@@ -48,7 +48,7 @@
                                                     <th width ='7%'>Hasil</th>
                                                     <th width ='7%'>Status HRD</th>
                                                     <th width ='8%'>Tgl Dikontrak</th>
-                                                    <th width ='12%'>Action</th>
+                                                    <th width ='15%'>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

@@ -127,6 +127,7 @@ class tentukan_bantuan extends AUTH_Controller {
 		$algoritma->data_kategori = $data_training->tampil_data_kategori();
 		$algoritma->set_class('hasil');
 		
+		$nip = $this->input->get('nip');
 		$nama = $this->input->get('nama');
 		$p1 = $this->input->get('penampilan');
 		$p2 = $this->input->get('kelengkapan');
@@ -144,6 +145,7 @@ class tentukan_bantuan extends AUTH_Controller {
 			$algoritma->data_set($d[0], $d[1], $d[2], $d[3], $d[4], $d[5], $d[6], $d[7]);
 			$perhitungan = $algoritma->mining();
 			$data_out = array(
+				'nip'=>$nip,
 				'nama'=>$nama,
 				'input'=>$d,
 				'hasil'=>$perhitungan
@@ -153,11 +155,16 @@ class tentukan_bantuan extends AUTH_Controller {
     }
     function simpan_perhitungan(){
     	$this->load->model('M_HAdmin');
+    	$nip = $_GET['nip'];
+    	$nama = $_GET['nama'];
     	$data_form = $_GET['data_form'];
     	$hasil = $_GET['hasil'];
-		$nama = $_GET['nama'];
-		$NIP = $_GET['NIP'];
-    	$r = $this->M_HAdmin->simpan_hasil_perhitungan($data_form, $hasil, $nama, $NIP);
+    	$perpanjang = $_GET['perpanjang'];
+    	$tidak_diperpanjang = $_GET['tidak_diperpanjang'];
+    	$kirim = $_GET['kirim'];
+		$tgl_kontrak = date('d/m/Y');
+		
+    	$r = $this->M_HAdmin->simpan_hasil_perhitungan($data_form, $hasil, $nama, $nip, $kirim, $perpanjang, $tidak_diperpanjang, $tgl_kontrak);
     	echo json_encode(array( 
     		'respon' => $r,
     		'status' => ($r) ? 200 : 404

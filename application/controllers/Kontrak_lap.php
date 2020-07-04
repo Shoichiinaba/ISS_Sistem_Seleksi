@@ -39,7 +39,7 @@ class Kontrak_lap extends CI_Controller {
         $pdf->Cell(0,0,'UNTUK JANGKA WAKTU TERTENTU ',0,0,'C');
         $pdf->Ln(3);
         $pdf->SetFont('Arial','i',9);
-        $pdf->Cell(90,12,'Alamat: Jl.',0,0,'C');
+        $pdf->Cell(90,12,'Alamat: Jl.Kedungmundu raya no 47, Semarang ',0,0,'C');
         $pdf->Cell(26,12,'Tlp: (024) 7617910',0,0,'R');
         $pdf->Cell(70,12,'Code Pos: ',0,0,'R');
         $pdf->Ln(0);
@@ -298,16 +298,16 @@ class Kontrak_lap extends CI_Controller {
     
             //Kop Surat
             $pdf->Cell(25);
-            $pdf->Image(base_url(). "assets/img/kon.png",13,1,'C');
+            $pdf->Image(base_url(). "assets/img/kon.png",10,1,'C');
             $pdf->Ln(0);
-            $pdf->Cell(0,0,'PEMUTUSAN HUBUNGAN KERJA ',0,0,'C');
+            $pdf->Cell(0,0,'SURAT PEMUTUSAN HUBUNGAN KERJA ',0,0,'C');
             $pdf->Ln(5);
             $pdf->Cell(0,0,' KARYAWAN TIDAK MEMENUHI PENILAIAN PERUSAHAAN',0,0,'C');
             $pdf->Ln(3);
             $pdf->SetFont('Arial','i',9);
-            $pdf->Cell(90,12,'Alamat: Jl.',0,0,'C');
+            $pdf->Cell(118,12,'Alamat: Jl.Kedungmundu raya no 47, Semarang ',0,0,'C');
             $pdf->Cell(26,12,'Tlp: (024) 7617910',0,0,'R');
-            $pdf->Cell(70,12,'Code Pos: ',0,0,'R');
+            $pdf->Cell(47,12,'Code Pos: 50273',0,0,'R');
             $pdf->Ln(0);
             $pdf->setlinewidth(0.6);
             $pdf->Cell(0, 9, " ", "B");
@@ -317,67 +317,68 @@ class Kontrak_lap extends CI_Controller {
             $pdf->Ln(4);
     
             // konten lampiran
+            $pdf->SetFont('Arial','',10);
+            $pdf->Ln();
+            $pdf->Cell(35, 4, 'Perihal', 0, 0, 'L'); 
+            $pdf->Cell(85, 4,': Surat Pemutusan Hubungan Kerja', 0, 0, 'L');
+            $pdf->Ln(5);
+            $pdf->Ln(5);
+            $pdf->Cell(35, 4, 'Kepada Yth,  ', 0, 0, 'L'); 
+            $pdf->Ln(5);
+            $pdf->Cell(85, 4, 'Sdr. '.$nama_karyawan, 0, 0, 'L');
+            $pdf->Ln(5);
+            $pdf->Cell(35, 4, 'Ditempat', 0, 0, 'L');
+            $pdf->Ln(5);
+            
+            // konten lampiran
             $pdf->SetFont('Arial','',11);
             $pdf->Ln(18);
-            $pdf->Cell(35, 4, 'Perjanjian kerja ini dibuat dan ditandatangani di Semarang, untuk, oleh, dan antara pihak dibawah ini:', 0, 0, 'L');
+            $pdf->Cell(35, 4, 'Dengan Hormat,', 0, 0, 'L');
             $pdf->Ln(10);
-            $pdf->Cell(35, 4, '1. Nama Lengkap', 0, 0, 'L'); 
-            $pdf->Cell(85, 4,'         :      --', 0, 0, 'L');
+            $pdf->Cell(35, 4, 'Berdasrkan hasil evaluasi kinerja saudara selama kontrak dan telah dilakukan seleksi menggunakan sistem,', 0, 0, 'L'); 
             $pdf->Ln(5);
-            $pdf->Cell(35, 4, '    Jabatan', 0, 0, 'L');
-            $pdf->Cell(85, 4,'         : Manager Personalia', 0, 0, 'L');
+            $pdf->Cell(35, 4, 'setelah hasil kami terima dari bagian admin penyeleksi karyawan memutuskan bahwa saudara yang bernama', 0, 0, 'L'); 
             $pdf->Ln(5);
-            $pdf->Cell(35, 4,'    Alamat', 0, 0, 'L');
-            $pdf->Cell(85, 4,'         :', 0, 0, 'L');
+            $pdf->Cell(35, 4, ''.$nama_karyawan, 0, 0, 'L');
+            $pdf->Ln(5);
+            $pdf->Cell(70, 4,'"TIDAK DI PERPANJANG KONTRAK"', 0, 0, 'L');
+            $pdf->Ln(5);
+            $pdf->Ln(5);
+            $pdf->Cell(35, 4,'Oleh sebab itu, dengan ini kami memberikan surat pemutusan hubungan kerja bahwa saudara', 0, 0, 'L');
+            $pdf->Ln(5);
+            $pdf->Cell(35, 4, ''.$nama_karyawan, 0, 0, 'L');
+            $pdf->Cell(63, 4, 'tidak di perpanjang Kontrak.', 0, 0, 'C'); 
+            $pdf->Ln(5);
+            
+            $pdf->Ln(5);
+            $pdf->Cell(35, 4, 'Kami selaku HRD hanya mendapatkan data dari bagian admin seleksi dan memanggil nama-nama,', 0, 0, 'L');
+            $pdf->Ln(5);
+            $pdf->Cell(85, 4,'yang bersangkutan.', 0, 0, 'L');
             $pdf->Ln(10);
-            $pdf->Cell(35, 4, 'Dalam hal ini bertindak untuk dan atas nama PT. ISS Indonesia, yang berdomisili di jl.Soekarno Hatta', 0, 0, 'L');
+            $pdf->Cell(35, 4,'Demikian Serat Pemutusan kerja atau tidak perpanjang kontrak ini kami sampaikan agar dapat dimaklumi,', 0, 0, 'L');
             $pdf->Ln(5);
-            $pdf->Cell(35, 4,'No 12, disebut dengan : PIHAK PERTAMA.', 0, 0, 'L');
-            $pdf->Ln(10);
-            $pdf->Cell(35, 4, '2. NIP', 0, 0, 'L'); 
-            $pdf->Cell(85, 4,'         : '.$NIP, 0, 0, 'L');
-            $pdf->Ln(5);
-            $pdf->Cell(35, 4, '    Nama Karyawan', 0, 0, 'L');
-            $pdf->Cell(85, 4,'         : '.$nama_karyawan, 0, 0, 'L');
-            $pdf->Ln(5);
-            $pdf->Cell(35, 4,'    Penilaian Perpanjang', 0, 0, 'L');
-            $pdf->Cell(85, 4,'         : '.$nilai_perpanjang, 0, 0, 'L');
-            $pdf->Ln(5);
-            $pdf->Cell(35, 4,'    Penilaian Tidak', 0, 0, 'L');
-            $pdf->Cell(85, 4,'         : '.$nilai_tidak, 0, 0, 'L');
-            $pdf->Ln(5);
-            $pdf->Cell(35, 4,'    Mulai Perpanjang', 0, 0, 'L');
-            $pdf->Cell(85, 4,'         : '.$tgl_kontrak, 0, 0, 'L');
-            $pdf->Ln(5);
-            $pdf->Cell(35, 4,'    Status', 0, 0, 'L');
-            $pdf->Cell(85, 4,'         : '.$hasil, 0, 0, 'L');
-            $pdf->Ln(10);
-            $pdf->Cell(35, 4,'Dalam hal ini bertindak atas nama sendiri, untuk selanjutnya disebut PIHAK KEDUA.', 0, 0, 'L');
-            $pdf->Ln(10);
-            $pdf->Cell(35, 4,'Pihak pertama dan pihak kedua sepakat untuk mengikat satu sama lain dalam perjanjian kerja untuk', 0, 0, 'L');
-            $pdf->Ln(5);
-            $pdf->Cell(35, 4,'waktu tertentu (PKWT), dengan ketentuan sebagai nama dituangkan dalam pasal-pasal dibawah ini.', 0, 0, 'L');
-            $pdf->Ln(80);
+            $pdf->Cell(85, 4,'trimakasih.', 0, 0, 'L');
+            $pdf->Ln(45);
+            
     
             //Footer
-            $pdf->Ln(25);
+            $pdf->Ln(45);
             $pdf->Cell(188, 4, 'Semarang,'.date(" d F Y"), 0, 0, 'R');
             $pdf->Ln(6);
-            $pdf->Cell(37, 4, 'Pihak Pertama,', 0, 0, 'C');
-            $pdf->Cell(132, 4, 'Pihak Kedua,', 0, 0, 'R');
+            $pdf->Cell(37, 4, 'HRD ISS ,', 0, 0, 'C');
+            $pdf->Cell(127, 4, 'Karyawan,', 0, 0, 'R');
             $pdf->Ln(20);
             $pdf->Cell(47, 4,'JOKO PRIYANTO, SH, MS.i', 0, 0, 'L');
             $pdf->Cell(134, 4,''.$nama_karyawan, 0, 0, 'R');
             $pdf->setlinewidth(0.3);
-            $pdf->Line(11,272,60,272);
-            $pdf->Line(199,272,150,272);
+            $pdf->Line(11,266,60,266);
+            $pdf->Line(199,266,150,266);
             $pdf->Ln(6);
             $pdf->Cell(9, 4,'NIP', 0, 0, 'R');
             $pdf->Cell(20, 4,':19690225', 0, 0, 'R');
             $pdf->Cell(118, 4, 'NIP', 0, 0, 'R');
             $pdf->Cell(50, 4,': '.$NIP, 0, 0, 'L');
-            
-            $pdf->Image(base_url(). "assets/img/par.png",14,250,'L');
+            $pdf->Image(base_url(). "assets/img/par.png",14,244,'L');
     
             $pdf->Output();
             
