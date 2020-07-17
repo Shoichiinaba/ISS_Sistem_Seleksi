@@ -83,13 +83,13 @@
 
           <li <?=$this->uri->segment(1) =='KirimHR' ? 'class="active"' : ''?>>
               <a href="<?php echo site_url('KirimHR'); ?>">
-              <i style= 'color: red' class="fa  fa-share-alt"></i><span>Hasil [Kiriman Admin] </span>
+              <i style= 'color: red' class="fa  fa-share-alt"></i><span>Verifkasi Hasil Seleksi </span>
               <span class="badge bg-orange right"><?php echo $notif; ?></span>
               </a>
           </li>
           <li <?=$this->uri->segment(1) =='New_kontrak' ? 'class="active"' : ''?>>
               <a href="<?php echo site_url('New_kontrak'); ?>">
-              <i style= 'color: red' class="fa  fa-pied-piper-alt"></i><span> Sudah di Kontrak </span>
+              <i style= 'color: red' class="fa  fa-pied-piper-alt"></i><span> Hasil Verifikasi </span>
               </a>
           </li>
     </li> 

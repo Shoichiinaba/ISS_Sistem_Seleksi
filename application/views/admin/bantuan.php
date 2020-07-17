@@ -191,8 +191,8 @@ $(document).ready(function(){
                                       echo "<td".$tanggung_jawab_td.">".$tanggung_jawab."<input type='hidden' name='tanggung_jawab[]' value='$tanggung_jawab'/></td>";
                                       echo "<td".$teamwork_td.">".$teamwork."<input type='hidden' name='teamwork[]' value='$teamwork'/></td>";
                                       echo "<td".$best_employee_td.">".$best_employee."<input type='hidden' name='best_employee[]' value='$best_employee'/></td>";
-                                      echo "<td style= 'color: red';>".round($perhitungan['nilai']['Perpanjang'], 5)."<input type='hidden' name='nilai_perpanjang[]' value='".round($perhitungan['nilai']['Perpanjang'], 5)."'/></td>";
-                                      echo "<td style= 'color: red';>".round($perhitungan['nilai']['Tidak diperpanjang'], 5)."<input type='hidden' name='nilai_tidak[]' value='".round($perhitungan['nilai']['Tidak diperpanjang'], 5)."'/></td>";
+                                      echo "<td style= 'color: red';>".round($perhitungan['nilai']['Perpanjang'], 6)."<input type='hidden' name='nilai_perpanjang[]' value='".round($perhitungan['nilai']['Perpanjang'], 5)."'/></td>";
+                                      echo "<td style= 'color: red';>".round($perhitungan['nilai']['Tidak diperpanjang'], 6)."<input type='hidden' name='nilai_tidak[]' value='".round($perhitungan['nilai']['Tidak diperpanjang'], 5)."'/></td>";
                                       echo "<td style= 'color: blue';>".$perhitungan['Status']."<input type='hidden' name='hasil[]' value='".$perhitungan['Status']."'/></td>";
                                       echo "</tr>";
                                     }

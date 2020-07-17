@@ -8,17 +8,17 @@ class User extends AUTH_Controller {
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->model('M_admin');
-		// $this->load->model('M_HR');
+		$this->load->model('M_HR');
 
 		
 		
 	}
 	function index()
 	{
-		$data['list']=$this->M_admin->get_data_admin();
+		$data['list']			=$this->M_admin->get_data_admin();
 		$data['perpanjang']		=$this->M_HAdmin->hitperpanjang();
-		$data['content'] = 'admin/list_admin';
-		$data['userdata'] 	= $this->userdata;
+		$data['content'] 		= 'admin/list_admin';
+		$data['userdata'] 		= $this->userdata;
 		$this->load->view($this->template, $data);	    
 	}
 
